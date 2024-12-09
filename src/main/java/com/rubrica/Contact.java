@@ -34,7 +34,7 @@ public class Contact {
      * @return Il nome del contatto
      */
     public String getNome() {
-        
+        return nome;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Contact {
      * @param nome Il nome da assegnare al contatto
      */
     public void setNome(String nome) {
-        
+       this.nome=nome;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Contact {
      * @return Il cognome del contatto
      */
     public String getCognome() {
-        
+        return cognome;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Contact {
      * @param cognome Il cognome da assegnare al contatto
      */
     public void setCognome(String cognome) {
-        
+        this.cognome=cognome;
     }
 
     /**
@@ -70,7 +70,7 @@ public class Contact {
      * @return L'array di email
      */
     public String[] getEmail() {
-        
+        return email;
     }
 
     /**
@@ -80,7 +80,10 @@ public class Contact {
      * @param email L'email da assegnare al contatto
      */
     public void setEmail(int index, String email) {
-        
+        if (index >= 0 && index < 3) {
+            this.email[index] = email;
+        }
+
     }
 
     /**
@@ -89,7 +92,8 @@ public class Contact {
      * @return L'array dei numeri di telefono
      */
     public String[] getTelefono() {
-        
+        return telefono;
+
     }
 
     /**
@@ -99,7 +103,10 @@ public class Contact {
      * @param telefono Il numero di telefono da assegnare al contatto
      */
     public void setTelefono(int index, String telefono) {
-        
+        if (index >= 0 && index < 3) {
+            this.telefono[index] = telefono;
+        }
+
     }
 
     /**
@@ -108,7 +115,8 @@ public class Contact {
      * @return Il tipo di contatto
      */
     public String getTipoContatto() {
-        
+        return tipoContatto;
+
     }
 
     /**
@@ -118,7 +126,10 @@ public class Contact {
      * @param tipoContatto Il tipo di contatto da assegnare
      */
     public void setTipoContatto(String tipoContatto) {
-        
+        if (tipoContatto.equals("Preferito") || tipoContatto.equals("Emergenza") || tipoContatto.equals("Nessuno")) {
+            this.tipoContatto = tipoContatto;
+        }
+
     }
 
     /**
