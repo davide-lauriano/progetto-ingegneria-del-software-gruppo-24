@@ -26,11 +26,12 @@ public class Rubrica {
      * @throws IllegalArgumentException Se sia il nome che il cognome del contatto sono vuoti
      */
     public void aggiungiContact(Contact contact) {
-        if (contact.getNome().isEmpty() && contact.getCognome().isEmpty()) {
-            throw new IllegalArgumentException("Nome e cognome sono obbligatori");
-        }
-        contatti.add(contact);
+    if (contact.getNome().isEmpty() && contact.getCognome().isEmpty()) {
+        throw new IllegalArgumentException("Nome e cognome sono obbligatori");
     }
+    contatti.add(contact);
+}
+
 
     /**
      * Rimuove un contatto dalla rubrica.
