@@ -26,7 +26,10 @@ public class Rubrica {
      * @throws IllegalArgumentException Se sia il nome che il cognome del contatto sono vuoti
      */
     public void aggiungiContact(Contact contact) {
-        
+        if (contact.getNome().isEmpty() && contact.getCognome().isEmpty()) {
+            throw new IllegalArgumentException("Nome e cognome sono obbligatori");
+        }
+        contatti.add(contact);
     }
 
     /**
@@ -34,7 +37,7 @@ public class Rubrica {
      *
      */
     public void eliminaContact(Contact contact) {
-        
+        contatti.remove(contact);
     }
 
     /**
@@ -43,7 +46,7 @@ public class Rubrica {
      * @return La lista dei contatti
      */
     public List<Contact> getContatti() {
-       
+       return contatti;
     }
 
     /**
@@ -52,7 +55,7 @@ public class Rubrica {
      * @param contatti La nuova lista di contatti
      */
     public void setContatti(List<Contact> contatti) {
-        
+        this.contatti = contatti;
     }
 
     /**
@@ -60,34 +63,36 @@ public class Rubrica {
      * I dettagli dei contatti vengono stampati in console.
      */
     public void visualizzaContacts() {
-        
+        for (Contact contact : contatti) {
+            System.out.println(contact);
+        }
     }
 
     /**
      * Ordina i contatti per nome in ordine alfabetico crescente (A-Z).
      */
     public void ordinaPerNomeAsc() {
-        
+         Collections.sort(contatti, Comparator.comparing(Contact::getNome));
     }
 
     /**
      * Ordina i contatti per cognome in ordine alfabetico crescente (A-Z).
      */
     public void ordinaPerCognomeAsc() {
-        
+        Collections.sort(contatti, Comparator.comparing(Contact::getCognome));
     }
 
     /**
      * Ordina i contatti per nome in ordine alfabetico decrescente (Z-A).
      */
     public void ordinaPerNomeDesc() {
-        
+        Collections.sort(contatti, Comparator.comparing(Contact::getNome).reversed());
     }
 
     /**
      * Ordina i contatti per cognome in ordine alfabetico decrescente (Z-A).
      */
     public void ordinaPerCognomeDesc() {
-       
+       Collections.sort(contatti, Comparator.comparing(Contact::getCognome).reversed());
     }
 }
