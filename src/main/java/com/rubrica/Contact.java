@@ -1,5 +1,9 @@
 package com.rubrica;
 
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 /**
  * Rappresenta un contatto telefonico con nome, cognome, email, numeri di telefono e tipo di contatto.
  * Ogni contatto può avere fino a 3 indirizzi email, 3 numeri di telefono e un tipo di contatto
@@ -138,13 +142,41 @@ public class Contact {
      * 
      * @return La rappresentazione del contatto come stringa
      */
-    @Override
-    public String toString() {
-        String emailStr = String.join(", ", email);
-        String telefonoStr = String.join(", ", telefono);
-        return "Contatto: " + nome + " " + cognome +
-               "\nEmail: " + (emailStr.isEmpty() ? "Nessuna" : emailStr) +
-               "\nTelefono: " + (telefonoStr.isEmpty() ? "Nessuno" : telefonoStr) +
-               "\nTipo di contatto: " + tipoContatto;
-    }
+   @Override
+public String toString() {
+    String emailStr = Arrays.stream(email)
+                            .filter(e -> e != null && !e.isEmpty())
+                            .collect(Collectors.joining(", "));
+    String telefonoStr = Arrays.stream(telefono)
+                               .filter(t -> t != null && !t.isEmpty())
+                               .collect(Collectors.joining(", "));
+    
+    return "Contatto: " + nome + " " + cognome +
+           "\nEmail: " + (emailStr.isEmpty() ? "Nessuna" : emailStr) +
+           "\nTelefono: " + (telefonoStr.isEmpty() ? "Nessuno" : telefonoStr) +
+           "\nTipo di contatto: " + tipoContatto;
 }
+
+    
+    @Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Contact contact = (Contact) obj;
+    return Objects.equals(nome, contact.nome) &&
+           Objects.equals(cognome, contact.cognome) &&
+           Arrays.equals(email, contact.email) &&
+           Arrays.equals(telefono, contact.telefono) &&
+           Objects.equals(tipoContatto, contact.tipoContatto);
+}
+
+@Override
+public int hashCode() {
+    int result = Objects.hash(nome, cognome, tipoContatto);
+    result = 31 * result + Arrays.hashCode(email);
+    result = 31 * result + Arrays.hashCode(telefono);
+    return result;
+}
+
+}
+
